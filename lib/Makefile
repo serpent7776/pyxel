@@ -67,6 +67,18 @@ CARGO_CLEAN = cargo clean
 CARGO_BUILD = cargo build $(BUILD_OPT)
 COPY_FILES = cp $(SRC_LIB_FILE) $(DST_LIB_FILE)
 
+# FreeBSD
+else ifeq ($(shell uname),FreeBSD)
+PLATFORM = freebsd
+PYTHON = python3
+TARGET_DIR = $(BUILD_DIR)/target/release
+SRC_LIB_FILE = $(TARGET_DIR)/lib$(PYXEL_LIB_NAME).so
+DST_LIB_FILE = $(PYXEL_LIB_DIR)/$(PYXEL_LIB_NAME).so
+
+CARGO_CLEAN = cargo clean
+CARGO_BUILD = cargo build $(BUILD_OPT)
+COPY_FILES = cp $(SRC_LIB_FILE) $(DST_LIB_FILE)
+
 # Others
 else
 $(error "unsupported platform")
